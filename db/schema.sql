@@ -1,25 +1,12 @@
-DROP DATABASE IF EXISTS employee_db;
+DROP DATABASE IF EXISTS library_db;
+CREATE DATABASE library_db;
 
-CREATE DATABASE employee_db;
+USE library_db;
 
-USE employee_db;
-
-CREATE TABLE department (
+CREATE TABLE departments (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  department_name VARCHAR(30) NOT NULL,
+  name VARCHAR(30) NOT NULL,
 );
-
-CREATE TABLE roles (
-  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  title VARCHAR(30) NOT NULL,
-  salary DECIMAL NOT NULL,
-  department_id INT,
-  FOREIGN KEY (department_id)
-  REFRENCES department(id)
-  ON DELETE SET NULL
-
-);
-
 
 CREATE TABLE employee (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -27,10 +14,10 @@ CREATE TABLE employee (
   last_name VARCHAR(30) NOT NULL,
   roles_id INT,
   FOREIGN KEY (roles_id)
-  REFRENCES roles(id)
+  REFERENCES roles(id)
   ON DELETE SET NULL,
   manager_id INT,
   FOREIGN KEY (manager_id)
-  REFRENCES employee(id)
+  REFERENCES employee(id)
 
 );
